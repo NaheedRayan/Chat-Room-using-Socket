@@ -39,9 +39,9 @@ Here we can see 3 terminals
 2. Client1
 3. Client2
 
-```cmd
-Since we are testing it in the same computer we are using localhost for clients to connect. As a result every ip looks the same.But if we connect with other computer we will see different ip addresses.
-```
+
+**Since we are testing it in the same computer we are using localhost for clients to connect. As a result every ip looks the same.But if we connect with other computer we will see different ip addresses.**
+
 <br>
 
 # Explaination
