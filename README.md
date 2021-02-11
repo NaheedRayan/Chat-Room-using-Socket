@@ -26,4 +26,22 @@ Here "localhost" is the server you wanna connect.
 <br>
 <br>
 
+# Some Screenshots
+
+## We will be creating a server and two clients to demonstrate how it works
+<br>
+
+![](images/v1/gif01.gif)
+
+Here we can see 3 terminals
+
+1. Server
+2. Client1
+3. Client2
+
+```diff
++Since we are testing it in the same computer we are using localhost for clients to connect. As a result every ip looks the same.But if we connect with other computer we will see different ip addresses.
+```
+<br>
+
 # Explaination
