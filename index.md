@@ -1,37 +1,50 @@
-## Welcome to GitHub Pages
+# Chat-Room-using-Socket
 
-You can use the [editor on GitHub](https://github.com/NaheedRayan/Chat-Room-using-Socket/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+There are two versions of the program.
+- version 1 (simple)
+- version 2 (extra features)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+For learning purpose download the files in **Chat Room Version 1** .
+Then run the server.py and then client.py.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+How to run the server.py.  
+eg:
+```cmd
+python3 server.py "localhost" 1234
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/NaheedRayan/Chat-Room-using-Socket/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+How to run the client.py.  
+eg:
+```cmd
+python3 client.py "localhost" 1234
+```
+Here "localhost" is the server you wanna connect.
 
-### Support or Contact
+<br>
+<br>
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Some Screenshots
+
+## We will be creating a server and two clients to demonstrate how it works
+<br>
+
+![](images/v1/gif01.gif)
+
+Here we can see 3 terminals
+
+1. Server
+2. Client1
+3. Client2
+
+
+**Since we are testing it in the same computer we are using localhost for clients to connect. As a result every ip looks the same.But if we connect with other computer we will see different ip addresses.**
+
+**We can also see the disconnected clients on the server**
+
+<br>
+
+# Explaination
+Coming Soon...
