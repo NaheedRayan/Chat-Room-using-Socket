@@ -42,6 +42,8 @@ Here we can see 3 terminals
 
 **Since we are testing it in the same computer we are using localhost for clients to connect. As a result every ip looks the same.But if we connect with other computer we will see different ip addresses.**
 
+**We can also see the disconnected clients on the server**
+
 <br>
 
 # Explaination
