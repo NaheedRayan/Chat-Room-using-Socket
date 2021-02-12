@@ -42,11 +42,22 @@ increased as per convenience.
 server.listen(100) 
 
 list_of_clients = [] 
-
 def clientthread(conn, addr): 
 
 	# sends a message to the client whose user object is conn 
-	conn.send(bytes("Welcome to this chatroom!", 'utf-8')) 
+	# conn.send(bytes("Welcome to this chatroom!", 'utf-8')) 
+
+	# since its a thread then each user will have a different name 
+	name = ''
+	name = conn.recv(2048).decode()
+	
+	
+
+	msg = "({}){} {}".format(addr[0] , name , 'is connected.')
+	msg = "{:*^70}".format(msg)
+	print(msg)	
+	broadcast(msg , conn)
+
 
 	while True: 
 			try: 
@@ -56,16 +67,25 @@ def clientthread(conn, addr):
 					"""prints the message and address of the 
 					user who just sent the message on the server 
 					terminal"""
-					print ( addr[0] + "---> " + message) 
+					# print ( addr[0] + "---> " + message) 
+
+					# print("({})({:-^20}) {}".format(addr[0] , name , message))
 
 					# Calls broadcast function to send message to all 
-					message_to_send = addr[0] + "---> " + message 
+					# message_to_send = addr[0] + "---> " + message 
+					message_to_send = "({})({:-^20}) {}".format(addr[0] , name , message)
+					print(message_to_send)
+					
 					broadcast(message_to_send, conn) 
 
 				else: 
 					"""message may have no content if the connection 
 					is broken, in this case we remove the connection and close it"""
-					print(addr , 'disconnected')
+					msg = "({}){} {}".format(addr[0] , name , 'left the chat.')
+					msg = "{:*^70}".format(msg)
+					
+					print(msg)
+					broadcast(msg , conn)
 					conn.close()
 					remove(conn) 
 
@@ -80,7 +100,11 @@ def broadcast(message, connection):
 		if clients!=connection: 
 			try: 
 				clients.send(bytes(message, 'utf-8')) 
-			except: 
+			except:
+
+				msg = "({}){} {}".format(addr[0] , name , 'not available.')
+				msg = "{:*^70}".format(msg) 
+				print(msg)
 				clients.close() 
 
 				# if the link is broken, we remove the client 

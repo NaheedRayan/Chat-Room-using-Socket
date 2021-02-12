@@ -2,6 +2,7 @@
 import socket 
 import select 
 import sys 
+import pickle
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 if len(sys.argv) != 3: 
@@ -12,6 +13,11 @@ if len(sys.argv) != 3:
 IP_address = str(sys.argv[1]) 
 Port = int(sys.argv[2]) 
 server.connect((IP_address, Port)) 
+
+# at the starting it will just send the name
+name = ''
+name = input('Enter your name: ')
+server.send(bytes(name , 'utf-8'))
 
 while True: 
 
@@ -35,6 +41,12 @@ while True:
 		else: 
 		
 			message = input() 
+
+			# if the user wants to quit
+			if message == 'QUIT':
+				server.close()
+
+				
 			print(f"You ---> {message}")
 			server.send(bytes(message , 'utf-8'))
 			# message = sys.stdin.readline() 
