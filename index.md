@@ -22,6 +22,7 @@ eg:
 python3 client.py "localhost" 1234
 ```
 Here "localhost" is the server you wanna connect.
+Now just start chatting.
 
 <br>
 <br>
@@ -31,7 +32,17 @@ Here "localhost" is the server you wanna connect.
 ## We will be creating a server and two clients to demonstrate how it works
 <br>
 
+## Version 1
+
 ![](images/v1/gif01.gif)
+
+<br>
+
+## Version 2
+
+![](images/v2/gif02.gif)
+
+
 
 Here we can see 3 terminals
 
@@ -46,5 +57,25 @@ Here we can see 3 terminals
 
 <br>
 
-# Explaination
-Coming Soon...
+
+
+## Version.1 vs Version.2
+
+    Version 1:
+    - we are using fixed length of bytes for sending and receiving data(2048 bytes).
+    - here only the ip is visible
+
+    Version 2:
+    - we are using fixed length of bytes for sending and receiving data(2048 bytes).
+    - ip and name of the user can be seen.
+    - if the user is connected then everyone is notified.
+    - if the user is disconnected then everyone is notified.
+    - colored text is used
+    - by typing 'QUIT' we can exit the chat.
+
+## Now u can create more complicated versions.Its up to you.
+
+
+# Explanation
+
+Coming soon...
