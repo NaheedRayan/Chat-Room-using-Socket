@@ -2,7 +2,6 @@
 import socket 
 import select 
 import sys 
-import pickle
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 if len(sys.argv) != 3: 
@@ -37,6 +36,8 @@ while True:
 	for socks in read_sockets: 
 		if socks == server: 
 			message = socks.recv(2048).decode('utf-8') 
+
+			# we will add some color for convenience
 			print (message) 
 		else: 
 		
@@ -46,8 +47,11 @@ while True:
 			if message == 'QUIT':
 				server.close()
 
+			# for blue text
+			
+
 				
-			print(f"You ---> {message}")
+			print("\x1b[1;36;40m{}\x1b[0m {}".format(" You " , message))
 			server.send(bytes(message , 'utf-8'))
 			# message = sys.stdin.readline() 
 			# server.send(bytes(message , 'utf-8')) 

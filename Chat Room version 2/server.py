@@ -64,18 +64,23 @@ def clientthread(conn, addr):
 				message = conn.recv(2048).decode() 
 				if message: 
 
-					"""prints the message and address of the 
+					"""prints the ip , name and message of the 
 					user who just sent the message on the server 
 					terminal"""
-					# print ( addr[0] + "---> " + message) 
-
-					# print("({})({:-^20}) {}".format(addr[0] , name , message))
-
-					# Calls broadcast function to send message to all 
-					# message_to_send = addr[0] + "---> " + message 
-					message_to_send = "({})({:-^20}) {}".format(addr[0] , name , message)
-					print(message_to_send)
 					
+					# message_to_send = "({})({:-^20}) {}".format(addr[0] , name , message)
+					# sending colored message
+					# ip is yellow color
+					ip = '\x1b[1;33;40m' + str(addr[0]) + '\x1b[0m'
+					# name is red text on white background
+					name1 ="\x1b[1;31;40m{:-^20}\x1b[0m".format(name)
+					# green text
+					msg = '\x1b[1;32;40m' + message + '\x1b[0m'
+					
+
+
+					message_to_send = "({})({}) {}".format(ip , name1 , msg)
+					print(message_to_send)
 					broadcast(message_to_send, conn) 
 
 				else: 
