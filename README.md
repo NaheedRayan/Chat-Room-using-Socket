@@ -91,3 +91,8 @@ Unfortunately, select will not help you to process **stdin** and **network event
 - An extra thread for stdin. That should work fine and be the easiest way to do the job. Python threads support is quite ok if what you need is just waiting for I/O events.
 
 Source https://stackoverflow.com/questions/22251809/python-select-select-on-windows
+
+
+<br>
+
+# The End

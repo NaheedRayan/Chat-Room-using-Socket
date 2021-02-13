@@ -48,17 +48,18 @@ def clientthread(conn, addr):
 	# conn.send(bytes("Welcome to this chatroom!", 'utf-8')) 
 
 	# since its a thread then each user will have a different name 
+	# receiving connection from the client and receiveing the name
 	name = ''
 	name = conn.recv(2048).decode()
 	
 	
-
+	# welcoming the client and broadcasting clients connection to other users
 	msg = "({}){} {}".format(addr[0] , name , 'is connected.')
 	msg = "{:*^70}".format(msg)
 	print(msg)	
 	broadcast(msg , conn)
 
-
+	# here the main conversation starts
 	while True: 
 			try: 
 				message = conn.recv(2048).decode() 
@@ -78,7 +79,7 @@ def clientthread(conn, addr):
 					msg = '\x1b[1;32;40m' + message + '\x1b[0m'
 					
 
-
+					# formatting the message and printing and broadcasting it
 					message_to_send = "({})({}) {}".format(ip , name1 , msg)
 					print(message_to_send)
 					broadcast(message_to_send, conn) 
@@ -91,6 +92,8 @@ def clientthread(conn, addr):
 					
 					print(msg)
 					broadcast(msg , conn)
+
+					# removing the connection and closing it
 					conn.close()
 					remove(conn) 
 
