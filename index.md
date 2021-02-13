@@ -80,7 +80,7 @@ Here we can see 3 terminals
 
 ## This a simple expaination of the version 2 app
 
-![](images/v2/image02.jpg)
+![](images/v2/image02.png)
 
 <br>
 
