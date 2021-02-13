@@ -78,4 +78,21 @@ Here we can see 3 terminals
 
 # Explanation
 
-Coming soon...
+## This a simple expaination of the version 2 app
+
+![](images/v2/image02.png)
+
+<br>
+
+# **Some problems**
+This app does not run in windows.
+Unfortunately, select will not help you to process **stdin** and **network events** in one thread, as select can't work with streams on Windows. What you need is a way to read stdin without blocking. You may use:
+
+- An extra thread for stdin. That should work fine and be the easiest way to do the job. Python threads support is quite ok if what you need is just waiting for I/O events.
+
+Source https://stackoverflow.com/questions/22251809/python-select-select-on-windows
+
+
+<br>
+
+# The End
