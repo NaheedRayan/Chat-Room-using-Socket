@@ -1,1 +1,0 @@
-print('\x1b[1;31;47m' + ' Success! ' + '\x1b[0m')
