@@ -110,9 +110,10 @@ def broadcast(message, connection):
 				clients.send(bytes(message, 'utf-8')) 
 			except:
 
-				msg = "({}){} {}".format(addr[0] , name , 'not available.')
+				msg = "({}) {}".format(addr[0]  , 'not available.')
 				msg = "{:*^70}".format(msg) 
 				print(msg)
+				broadcast(msg,clients)
 				clients.close() 
 
 				# if the link is broken, we remove the client 
