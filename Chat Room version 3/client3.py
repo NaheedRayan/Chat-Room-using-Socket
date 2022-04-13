@@ -6,6 +6,7 @@ import select
 import sys 
 import threading
 from ipaddress import IPv4Address,IPv4Network
+import subprocess
 
 
 
@@ -23,11 +24,10 @@ if len(sys.argv) != 1:
 print("\x1b[1;36;40m{}\x1b[0m {}".format("Scanning for server on port 50000" , ""))
 IP_address = ""
 
-a = socket.gethostbyaddr(socket.gethostname())
-addr = str(IPv4Address(a[2][0]))
-c = addr.split('.')
-network_address = str(c[0]+"."+c[1]+"."+c[2]+".")
-print(network_address)
+# a = socket.gethostbyaddr(socket.gethostname())
+# addr = str(IPv4Address(a[2][0]))
+# print("Host address 			: " + "\033[1;32m"+addr + '\033[0m')
+
 
 
 server_list = []
@@ -48,7 +48,11 @@ def check_server(i):
 
 		try:	
 			server.connect((IP_address, Port)) 
-			print(IP_address + " Connected")
+			# print(IP_address + " Connected")
+			print("")
+			print("Server IP			: " "\033[1;93m" + IP_address + '\033[0m')
+			print("Connection Status		: " "\033[1;93m" + "OK" + '\033[0m')
+
 			server_list.append(server)
 			
 		except:
@@ -59,26 +63,61 @@ def check_server(i):
 
 thread_list = []
 
-for i in range(256):
-	for j in range(256):
-		
-		address = str(c[0]+"."+c[1]+"."+str(i)+"."+str(j))
-		if(len(server_list) == 1):
-			break
-		else:
-			t1 = threading.Thread(target= check_server,args=(address,))
-			thread_list.append(t1)
-			t1.start()
+##############################################################
+##############################################################
 
 
-# for thread in thread_list:
-# 	thread.join()
 
-print('Time taken:', time.time() - startTime)
+
+
+# Getting the default route adapter name
+# ip r | grep "default via " | grep  -E "dev [^ ]*"
+
+cmd = 'ip r | grep "default via " | grep  -Eo "dev [^ ]*"'
+ps = subprocess.run(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+adapter_name = ps.stdout.decode().strip().split(" ")
+
+print("Adapter name 			: " "\033[1;32m" + adapter_name[1] + '\033[0m')
+# print(adapter_name[1]) 
+
+
+
+cmd = 'ip r | grep -o "'+ ".*" + adapter_name[1] + " proto kernel" + '"'
+ps = subprocess.run(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+subnetmask = ps.stdout.decode().strip().split(" ")
+
+# ['192.168.0.0/24', 'dev', 'wlp2s0', 'proto', 'kernel']
+# print(subnetmask)
+
+print("Classless address 		: " + "\033[1;32m"+subnetmask[0] + '\033[0m')
+ip = subnetmask[0].split("/")
+print("Network IP address 		: " + "\033[1;32m"+ip[0] + '\033[0m')
+print("Network Mask 			: " + "\033[1;32m"+ip[1] + '\033[0m')
+
+
+net = IPv4Network(subnetmask[0])
+for addr in net:
+	# print(addr)
+	if(len(server_list) == 1):
+		break
+	else:
+		t1 = threading.Thread(target= check_server,args=(str(addr),))
+		thread_list.append(t1)
+		t1.start()
+
+
+##############################################################
+##############################################################
+
+# print('Time taken:', time.time() - startTime)
+print("Time taken			: " "\033[1;32m" + str(time.time() - startTime) + '\033[0m')
+print("")
 
 if(len(server_list)==0):
-	print("No server found")
-	exit()
+	print("\033[1;91m" + "No server found" + '\033[0m')
+	print("Connection Status		: " "\033[1;91m" + "Failed" + '\033[0m')
+	
+	sys.exit()
 
 
 server = server_list[0]
